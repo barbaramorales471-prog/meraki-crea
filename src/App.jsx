@@ -3,7 +3,7 @@ import {
   ShoppingBag, X, Plus, Minus, MessageCircle, Heart, Gift, Sparkles,
   Star, Instagram, Mail, ArrowRight, ArrowDown,
 } from "lucide-react";
-import logoUrl from "./logo.png";
+import logoUrl from "../IMG_0995.png";
 
 const PRODUCTS = [
   { id: "poleron", name: "Polerón Personalizado", desc: "Para esos días en que alguien necesita sentirse abrazado.", price: 11990, swatch: ["#D8C3A5", "#C98C6A"] },
