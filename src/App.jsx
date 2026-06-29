@@ -4,14 +4,19 @@ import {
   Star, Instagram, Mail, ArrowRight, ArrowDown,
 } from "lucide-react";
 import logoUrl from "../IMG_0995.png";
+import imgTaza from "../IMG_1018.png";
+import imgPoleron from "../IMG_1019.png";
+import imgLapiz from "../IMG_1020.png";
+import imgLlavero from "../IMG_1023.jpeg";
+import imgVaso from "../IMG_1024.jpeg";
 
 const PRODUCTS = [
-  { id: "poleron", name: "Polerón Personalizado", desc: "Para esos días en que alguien necesita sentirse abrazado.", price: 11990, swatch: ["#D8C3A5", "#C98C6A"] },
+  { id: "poleron", name: "Polerón Personalizado", desc: "Para esos días en que alguien necesita sentirse abrazado.", price: 11990, swatch: ["#D8C3A5", "#C98C6A"], photo: imgPoleron },
   { id: "polera", name: "Polera Personalizada", desc: "Tu mensaje o su nombre, puesto sobre algo que va a usar todos los días.", price: 9990, swatch: ["#E8DDCF", "#B89C7D"] },
-  { id: "taza", name: "Taza Personalizada", desc: "Para acompañar su café o té de cada mañana con un recuerdo tuyo.", price: 3000, swatch: ["#A8B39C", "#6B4F3A"] },
-  { id: "llavero", name: "Llavero Personalizado", desc: "Un detalle pequeño que lleva siempre encima, sin darse cuenta.", price: 1000, swatch: ["#B89C7D", "#E8DDCF"] },
-  { id: "lapiz", name: "Lápiz Personalizado", desc: "El detalle perfecto para regalar incluso sin ocasión especial.", price: 1000, swatch: ["#C98C6A", "#A8B39C"] },
-  { id: "vaso-termico", name: "Vaso Térmico Personalizado", desc: "Para que lleve algo tuyo a donde vaya, frío o caliente, todo el día.", price: 11990, swatch: ["#6B4F3A", "#D8C3A5"] },
+  { id: "taza", name: "Taza Personalizada", desc: "Para acompañar su café o té de cada mañana con un recuerdo tuyo.", price: 3000, swatch: ["#A8B39C", "#6B4F3A"], photo: imgTaza },
+  { id: "llavero", name: "Llavero Personalizado", desc: "Un detalle pequeño que lleva siempre encima, sin darse cuenta.", price: 1000, swatch: ["#B89C7D", "#E8DDCF"], photo: imgLlavero },
+  { id: "lapiz", name: "Lápiz Personalizado", desc: "El detalle perfecto para regalar incluso sin ocasión especial.", price: 1000, swatch: ["#C98C6A", "#A8B39C"], photo: imgLapiz },
+  { id: "vaso-termico", name: "Vaso Térmico Personalizado", desc: "Para que lleve algo tuyo a donde vaya, frío o caliente, todo el día.", price: 11990, swatch: ["#6B4F3A", "#D8C3A5"], photo: imgVaso },
   { id: "mug-termico", name: "Mug Térmico Personalizado", desc: "El mensaje que más quieres que lea, justo antes de empezar su día.", price: 7990, swatch: ["#A8B39C", "#C98C6A"] },
   { id: "agenda-a5", name: "Agenda A5", desc: "Para que cada página que escriba lleve un poco de ti también.", price: 11990, swatch: ["#D8C3A5", "#6B4F3A"] },
   { id: "agenda-b5", name: "Agenda B5", desc: "Más espacio para sus ideas, con su nombre en la portada.", price: 15990, swatch: ["#E8DDCF", "#C98C6A"] },
@@ -429,7 +434,13 @@ export default function MerakiCrea() {
           {PRODUCTS.map((p, i) => (
             <Reveal delay={i * 100} key={p.id}>
               <div className="mk-card">
-                <GiftArt swatch={p.swatch} id={p.id} />
+                {p.photo ? (
+                  <div className="gift-art">
+                    <img src={p.photo} alt={p.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                  </div>
+                ) : (
+                  <GiftArt swatch={p.swatch} id={p.id} />
+                )}
                 <div className="mk-card-body">
                   <h3 className="title-display">{p.name}</h3>
                   <p className="desc">{p.desc}</p>
