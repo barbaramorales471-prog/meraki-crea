@@ -619,7 +619,6 @@ export default function MerakiCrea() {
         </div>
       </section>
 
-      {/* INSTAGRAM */}
           <h2 className="title-serif">Síguenos en Instagram</h2>
           <p className="lede">@merakicrea_cl — más momentos, más historias, más regalos.</p>
         </Reveal>
@@ -630,6 +629,7 @@ export default function MerakiCrea() {
             </a>
           </div>
         </Reveal>
+
 
       </section>
 
