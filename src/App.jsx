@@ -14,6 +14,7 @@ import heroImg2 from "../IMG_HERO2.webp";
 import heroImg3 from "../IMG_HERO3.webp";
 import heroImg4 from "../IMG_HERO4.webp";
 import heroImg5 from "../IMG_HERO5.webp";
+imp
 
 const PRODUCTS = [
   { id: "poleron", name: "Polerón Personalizado", desc: "Para esos días en que alguien necesita sentirse abrazado.", price: 11990, swatch: ["#D8C3A5", "#C98C6A"], photo: imgPoleron },
