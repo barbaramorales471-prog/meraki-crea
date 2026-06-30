@@ -620,25 +620,17 @@ export default function MerakiCrea() {
       </section>
 
       {/* INSTAGRAM */}
-      <section className="mk-section mk-center">
-        <Reveal>
           <h2 className="title-serif">Síguenos en Instagram</h2>
           <p className="lede">@merakicrea_cl — más momentos, más historias, más regalos.</p>
         </Reveal>
-        <div className="mk-insta-grid">
-          {PRODUCTS.concat(PRODUCTS).slice(0, 8).map((p, i) => (
-            <div className="mk-insta-tile" key={i} style={{ background: `linear-gradient(135deg, ${p.swatch[0]}, ${p.swatch[1]})` }}>
-              <Instagram size={20} />
-            </div>
-          ))}
-        </div>
-        <Reveal delay={200}>
-          <div style={{ marginTop: 40 }}>
-            <a className="btn-secondary" href="https://www.instagram.com/merakicrea_cl" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", display: "inline-block" }}>
-              Síguenos
+        <Reveal delay={100}>
+          <div style={{ marginTop: 32, display: "flex", justifyContent: "center" }}>
+            <a className="btn-primary" href="https://www.instagram.com/merakicrea_cl" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+              <Instagram size={16} /> Síguenos
             </a>
           </div>
         </Reveal>
+
       </section>
 
       {/* FOOTER */}
