@@ -15,7 +15,6 @@ import heroImg3 from "../hero-3.webp";
 import heroImg4 from "../hero-4.webp";
 import heroImg5 from "../hero-5.webp";
 
-
 const PRODUCTS = [
   { id: "poleron", name: "Polerón Personalizado", desc: "Para esos días en que alguien necesita sentirse abrazado.", price: 11990, swatch: ["#D8C3A5", "#C98C6A"], photo: imgPoleron },
   { id: "polera", name: "Polera Personalizada", desc: "Tu mensaje o su nombre, puesto sobre algo que va a usar todos los días.", price: 9990, swatch: ["#E8DDCF", "#B89C7D"] },
@@ -268,7 +267,6 @@ export default function MerakiCrea() {
           display: flex; align-items: center; justify-content: center;
         }
 
-        /* ---------- Hero ---------- */
         .mk-hero {
           min-height: 100vh; display: flex; align-items: center;
           padding: 0 40px; position: relative; overflow: hidden;
@@ -346,7 +344,6 @@ export default function MerakiCrea() {
         }
         @keyframes bob { 0%,100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 8px); } }
 
-        /* ---------- Section generic ---------- */
         .mk-section { padding: 110px 40px; max-width: 1180px; margin: 0 auto; }
         .mk-section.tight { padding: 90px 40px; }
         .mk-center { text-align: center; }
@@ -354,7 +351,6 @@ export default function MerakiCrea() {
         .mk-section .lede { font-size: 16px; color: var(--chocolate); opacity: 0.75; max-width: 540px; line-height: 1.7; }
         .mk-center .lede { margin: 0 auto; }
 
-        /* ---------- Values (3 icons) ---------- */
         .mk-values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px; margin-top: 64px; }
         .mk-value { text-align: center; padding: 0 16px; }
         .mk-value-icon {
@@ -365,7 +361,6 @@ export default function MerakiCrea() {
         .mk-value h3 { font-size: 19px; margin-bottom: 10px; color: var(--chocolate); }
         .mk-value p { font-size: 14px; color: var(--chocolate); opacity: 0.7; line-height: 1.6; }
 
-        /* ---------- Products ---------- */
         .mk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 36px; margin-top: 60px; }
         .mk-card { background: var(--blanco); border-radius: 4px; overflow: hidden; transition: transform 0.35s ease, box-shadow 0.35s ease; }
         .mk-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(107,79,58,0.10); }
@@ -384,7 +379,6 @@ export default function MerakiCrea() {
         .btn-personalize.added { background: var(--terracota); color: white; }
         .btn-personalize:hover { background: var(--terracota); color: white; }
 
-        /* ---------- How it works ---------- */
         .mk-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 64px; }
         .mk-step { text-align: center; position: relative; }
         .mk-step-num {
@@ -395,19 +389,16 @@ export default function MerakiCrea() {
         .mk-step h3 { font-size: 18px; margin-bottom: 8px; }
         .mk-step p { font-size: 13.5px; opacity: 0.7; line-height: 1.6; }
 
-        /* ---------- Why Meraki ---------- */
         .mk-why { background: var(--chocolate); color: var(--marfil); border-radius: 4px; padding: 80px 60px; text-align: center; }
         .mk-why h2 { color: var(--marfil); }
         .mk-why p { color: var(--marfil); opacity: 0.85; max-width: 600px; margin: 0 auto; font-size: 17px; line-height: 1.8; font-style: italic; font-family: 'Cormorant Garamond', serif; }
 
-        /* ---------- Testimonials ---------- */
         .mk-testimonials { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; margin-top: 60px; }
         .mk-testimonial { background: var(--blanco); border-radius: 4px; padding: 32px 28px; }
         .mk-stars { display: flex; gap: 3px; color: var(--terracota); margin-bottom: 16px; }
         .mk-testimonial p { font-size: 14.5px; line-height: 1.7; color: var(--chocolate); opacity: 0.85; margin-bottom: 18px; font-style: italic; }
         .mk-testimonial .who { font-size: 13px; font-weight: 600; color: var(--chocolate); }
 
-        /* ---------- Instagram ---------- */
         .mk-insta-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 50px; }
         .mk-insta-tile {
           aspect-ratio: 1; border-radius: 4px; display: flex; align-items: center; justify-content: center;
@@ -415,7 +406,6 @@ export default function MerakiCrea() {
         }
         .mk-insta-tile:hover { opacity: 1; }
 
-        /* ---------- Footer ---------- */
         .mk-footer { background: var(--arena); padding: 60px 40px 36px; }
         .mk-footer-inner { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 40px; }
         .mk-footer h4 { font-size: 14px; margin-bottom: 16px; color: var(--chocolate); letter-spacing: 0.03em; }
@@ -428,7 +418,6 @@ export default function MerakiCrea() {
           display: flex; align-items: center; justify-content: center; margin: 0;
         }
 
-        /* ---------- Cart drawer ---------- */
         .mk-overlay { position: fixed; inset: 0; background: rgba(107,79,58,0.35); z-index: 60; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
         .mk-overlay.open { opacity: 1; pointer-events: auto; }
         .mk-drawer {
@@ -468,7 +457,6 @@ export default function MerakiCrea() {
         }
       `}</style>
 
-      {/* HEADER */}
       <header className={`mk-header ${scrolled ? "scrolled" : ""}`}>
         <img src={LOGO_SRC} alt="Meraki Crea" className="mk-logo-img" />
         <button className="mk-nav-cart" onClick={() => setCartOpen(true)}>
@@ -478,7 +466,6 @@ export default function MerakiCrea() {
         </button>
       </header>
 
-      {/* HERO */}
       <section className="mk-hero">
         <HeroCarousel images={HERO_IMAGES} />
         <div className="mk-hero-inner">
@@ -497,7 +484,6 @@ export default function MerakiCrea() {
         <div className="mk-scroll-cue"><ArrowDown size={16} /> Descubre más</div>
       </section>
 
-      {/* VALORES */}
       <section className="mk-section mk-center">
         <Reveal>
           <h2 className="title-serif">Regalos con significado</h2>
@@ -528,7 +514,6 @@ export default function MerakiCrea() {
         </div>
       </section>
 
-      {/* CATALOGO */}
       <section className="mk-section mk-center" id="catalogo">
         <Reveal>
           <h2 className="title-serif">Encuentra ese regalo</h2>
@@ -564,7 +549,6 @@ export default function MerakiCrea() {
         </div>
       </section>
 
-      {/* COMO FUNCIONA */}
       <section className="mk-section mk-center">
         <Reveal>
           <h2 className="title-serif">Cómo funciona</h2>
@@ -587,7 +571,6 @@ export default function MerakiCrea() {
         </div>
       </section>
 
-      {/* POR QUE MERAKI */}
       <section className="mk-section">
         <Reveal>
           <div className="mk-why">
@@ -597,7 +580,6 @@ export default function MerakiCrea() {
         </Reveal>
       </section>
 
-      {/* TESTIMONIOS */}
       <section className="mk-section mk-center">
         <Reveal>
           <h2 className="title-serif">Lo que sienten quienes regalan Meraki</h2>
@@ -619,6 +601,8 @@ export default function MerakiCrea() {
         </div>
       </section>
 
+      <section className="mk-section mk-center">
+        <Reveal>
           <h2 className="title-serif">Síguenos en Instagram</h2>
           <p className="lede">@merakicrea_cl — más momentos, más historias, más regalos.</p>
         </Reveal>
@@ -629,11 +613,8 @@ export default function MerakiCrea() {
             </a>
           </div>
         </Reveal>
-
-
       </section>
 
-      {/* FOOTER */}
       <footer className="mk-footer">
         <div className="mk-footer-inner">
           <div>
@@ -660,7 +641,6 @@ export default function MerakiCrea() {
         <div className="mk-footer-bottom">© {new Date().getFullYear()} Meraki Crea · hecho con cariño en Chile</div>
       </footer>
 
-      {/* CART */}
       <div className={`mk-overlay ${cartOpen ? "open" : ""}`} onClick={() => setCartOpen(false)} />
       <aside className={`mk-drawer ${cartOpen ? "open" : ""}`}>
         <div className="mk-drawer-head">
