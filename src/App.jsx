@@ -9,12 +9,12 @@ import imgPoleron from "../IMG_1019.png";
 import imgLapiz from "../IMG_1020.png";
 import imgLlavero from "../IMG_1023.jpeg";
 import imgVaso from "../IMG_1024.jpeg";
-import heroImg1 from "../IMG_HERO1.webp";
-import heroImg2 from "../IMG_HERO2.webp";
-import heroImg3 from "../IMG_HERO3.webp";
-import heroImg4 from "../IMG_HERO4.webp";
-import heroImg5 from "../IMG_HERO5.webp";
-imp
+import heroImg1 from "../hero-1.webp";
+import heroImg2 from "../hero-2.webp";
+import heroImg3 from "../hero-3.webp";
+import heroImg4 from "../hero-4.webp";
+import heroImg5 from "../hero-5.webp";
+
 
 const PRODUCTS = [
   { id: "poleron", name: "Polerón Personalizado", desc: "Para esos días en que alguien necesita sentirse abrazado.", price: 11990, swatch: ["#D8C3A5", "#C98C6A"], photo: imgPoleron },
