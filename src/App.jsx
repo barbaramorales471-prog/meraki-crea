@@ -9,6 +9,11 @@ import imgPoleron from "../IMG_1019.png";
 import imgLapiz from "../IMG_1020.png";
 import imgLlavero from "../IMG_1023.jpeg";
 import imgVaso from "../IMG_1024.jpeg";
+import heroImg1 from "../IMG_HERO1.webp";
+import heroImg2 from "../IMG_HERO2.webp";
+import heroImg3 from "../IMG_HERO3.webp";
+import heroImg4 from "../IMG_HERO4.webp";
+import heroImg5 from "../IMG_HERO5.webp";
 
 const PRODUCTS = [
   { id: "poleron", name: "Polerón Personalizado", desc: "Para esos días en que alguien necesita sentirse abrazado.", price: 11990, swatch: ["#D8C3A5", "#C98C6A"], photo: imgPoleron },
@@ -30,6 +35,7 @@ const TESTIMONIALS = [
 
 const WHATSAPP_NUMBER = "56945342817";
 const LOGO_SRC = logoUrl;
+const HERO_IMAGES = [heroImg1, heroImg2, heroImg3, heroImg4, heroImg5];
 
 const clp = (n) =>
   new Intl.NumberFormat("es-CL", { style: "currency", currency: "CLP", maximumFractionDigits: 0 }).format(n);
@@ -104,6 +110,61 @@ function HeroIllustration() {
       <circle cx="290" cy="140" r="4" fill="#C98C6A" opacity="0.8" />
       <circle cx="280" cy="280" r="5" fill="#6B4F3A" opacity="0.5" />
     </svg>
+  );
+}
+
+function HeroCarousel({ images, intervalMs = 6000 }) {
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const timerRef = useRef(null);
+
+  useEffect(() => {
+    if (paused) return;
+    timerRef.current = setInterval(() => {
+      setIndex((i) => (i + 1) % images.length);
+    }, intervalMs);
+    return () => clearInterval(timerRef.current);
+  }, [paused, images.length, intervalMs]);
+
+  const goTo = (i) => setIndex(((i % images.length) + images.length) % images.length);
+  const prev = () => goTo(index - 1);
+  const next = () => goTo(index + 1);
+
+  return (
+    <div
+      className="hero-carousel"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      {images.map((src, i) => (
+        <img
+          key={i}
+          src={src}
+          alt={`Meraki Crea ${i + 1}`}
+          className={`hero-carousel-img ${i === index ? "active" : ""}`}
+          loading={i === 0 ? "eager" : "lazy"}
+        />
+      ))}
+      <div className="hero-carousel-overlay" aria-hidden="true" />
+
+      <button className="hero-carousel-arrow left" onClick={prev} aria-label="Imagen anterior">
+        <ArrowRight size={16} style={{ transform: "rotate(180deg)" }} />
+      </button>
+      <button className="hero-carousel-arrow right" onClick={next} aria-label="Imagen siguiente">
+        <ArrowRight size={16} />
+      </button>
+
+      <div className="hero-carousel-dots">
+        {images.map((_, i) => (
+          <button
+            key={i}
+            className={`hero-carousel-dot ${i === index ? "active" : ""}`}
+            onClick={() => goTo(i)}
+            aria-label={`Ir a imagen ${i + 1}`}
+          />
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -206,25 +267,60 @@ export default function MerakiCrea() {
           display: flex; align-items: center; justify-content: center;
         }
 
+        /* ---------- Hero ---------- */
         .mk-hero {
           min-height: 100vh; display: flex; align-items: center;
-          padding: 0 40px; position: relative;
-          background: linear-gradient(180deg, var(--marfil) 0%, var(--arena) 100%);
+          padding: 0 40px; position: relative; overflow: hidden;
+          background: var(--chocolate);
         }
+        .hero-carousel {
+          position: absolute; inset: 0; z-index: 0;
+        }
+        .hero-carousel-img {
+          position: absolute; inset: 0; width: 100%; height: 100%;
+          object-fit: cover; object-position: center;
+          opacity: 0; transition: opacity 1.1s ease-in-out;
+        }
+        .hero-carousel-img.active { opacity: 1; }
+        .hero-carousel-overlay {
+          position: absolute; inset: 0; background: rgba(0,0,0,0.23); z-index: 1;
+        }
+        .hero-carousel-arrow {
+          position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
+          background: rgba(255,255,255,0.25); border: none; color: white;
+          width: 38px; height: 38px; border-radius: 50%; cursor: pointer;
+          display: flex; align-items: center; justify-content: center;
+          backdrop-filter: blur(4px); transition: background 0.25s ease;
+        }
+        .hero-carousel-arrow:hover { background: rgba(255,255,255,0.4); }
+        .hero-carousel-arrow.left { left: 18px; }
+        .hero-carousel-arrow.right { right: 18px; }
+        .hero-carousel-dots {
+          position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);
+          z-index: 3; display: flex; gap: 8px;
+        }
+        .hero-carousel-dot {
+          width: 7px; height: 7px; border-radius: 50%; border: none;
+          background: rgba(255,255,255,0.45); cursor: pointer; padding: 0;
+          transition: background 0.25s ease, transform 0.25s ease;
+        }
+        .hero-carousel-dot.active { background: white; transform: scale(1.25); }
         .mk-hero-inner {
+          position: relative; z-index: 2;
           max-width: 1200px; margin: 0 auto; width: 100%;
-          display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center;
         }
+        .mk-hero-text { max-width: 620px; }
         .mk-hero-text h1 {
-          font-size: clamp(36px, 5.2vw, 58px); line-height: 1.18; color: var(--chocolate);
-          margin-bottom: 26px; font-style: italic;
+          font-size: clamp(36px, 5.2vw, 58px); line-height: 1.18; color: #FFFFFF;
+          margin-bottom: 30px; font-style: italic;
+          text-shadow: 0 2px 18px rgba(0,0,0,0.25);
         }
         .mk-hero-eyebrow {
           display: inline-flex; align-items: center; gap: 8px; font-size: 13px;
-          letter-spacing: 0.08em; text-transform: uppercase; color: var(--terracota);
+          letter-spacing: 0.08em; text-transform: uppercase; color: var(--arena);
           margin-bottom: 22px; font-weight: 500;
         }
-        .mk-hero-sub { font-size: 16.5px; line-height: 1.7; color: var(--chocolate); opacity: 0.8; max-width: 460px; margin-bottom: 38px; }
+        .mk-hero-sub { font-size: 16.5px; line-height: 1.7; color: #FFFFFF; opacity: 0.9; max-width: 460px; margin-bottom: 38px; }
         .mk-hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
         .btn-primary {
           background: var(--terracota); color: white; border: none; border-radius: 999px;
@@ -242,12 +338,14 @@ export default function MerakiCrea() {
         .hero-illustration { width: 100%; max-width: 420px; margin: 0 auto; display: block; }
         .mk-scroll-cue {
           position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+          z-index: 3;
           display: flex; flex-direction: column; align-items: center; gap: 6px;
-          color: var(--taupe); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+          color: #FFFFFF; opacity: 0.85; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
           animation: bob 2.2s ease-in-out infinite;
         }
         @keyframes bob { 0%,100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 8px); } }
 
+        /* ---------- Section generic ---------- */
         .mk-section { padding: 110px 40px; max-width: 1180px; margin: 0 auto; }
         .mk-section.tight { padding: 90px 40px; }
         .mk-center { text-align: center; }
@@ -255,6 +353,7 @@ export default function MerakiCrea() {
         .mk-section .lede { font-size: 16px; color: var(--chocolate); opacity: 0.75; max-width: 540px; line-height: 1.7; }
         .mk-center .lede { margin: 0 auto; }
 
+        /* ---------- Values (3 icons) ---------- */
         .mk-values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px; margin-top: 64px; }
         .mk-value { text-align: center; padding: 0 16px; }
         .mk-value-icon {
@@ -265,6 +364,7 @@ export default function MerakiCrea() {
         .mk-value h3 { font-size: 19px; margin-bottom: 10px; color: var(--chocolate); }
         .mk-value p { font-size: 14px; color: var(--chocolate); opacity: 0.7; line-height: 1.6; }
 
+        /* ---------- Products ---------- */
         .mk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 36px; margin-top: 60px; }
         .mk-card { background: var(--blanco); border-radius: 4px; overflow: hidden; transition: transform 0.35s ease, box-shadow 0.35s ease; }
         .mk-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(107,79,58,0.10); }
@@ -283,6 +383,7 @@ export default function MerakiCrea() {
         .btn-personalize.added { background: var(--terracota); color: white; }
         .btn-personalize:hover { background: var(--terracota); color: white; }
 
+        /* ---------- How it works ---------- */
         .mk-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 64px; }
         .mk-step { text-align: center; position: relative; }
         .mk-step-num {
@@ -293,16 +394,19 @@ export default function MerakiCrea() {
         .mk-step h3 { font-size: 18px; margin-bottom: 8px; }
         .mk-step p { font-size: 13.5px; opacity: 0.7; line-height: 1.6; }
 
+        /* ---------- Why Meraki ---------- */
         .mk-why { background: var(--chocolate); color: var(--marfil); border-radius: 4px; padding: 80px 60px; text-align: center; }
         .mk-why h2 { color: var(--marfil); }
         .mk-why p { color: var(--marfil); opacity: 0.85; max-width: 600px; margin: 0 auto; font-size: 17px; line-height: 1.8; font-style: italic; font-family: 'Cormorant Garamond', serif; }
 
+        /* ---------- Testimonials ---------- */
         .mk-testimonials { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; margin-top: 60px; }
         .mk-testimonial { background: var(--blanco); border-radius: 4px; padding: 32px 28px; }
         .mk-stars { display: flex; gap: 3px; color: var(--terracota); margin-bottom: 16px; }
         .mk-testimonial p { font-size: 14.5px; line-height: 1.7; color: var(--chocolate); opacity: 0.85; margin-bottom: 18px; font-style: italic; }
         .mk-testimonial .who { font-size: 13px; font-weight: 600; color: var(--chocolate); }
 
+        /* ---------- Instagram ---------- */
         .mk-insta-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 50px; }
         .mk-insta-tile {
           aspect-ratio: 1; border-radius: 4px; display: flex; align-items: center; justify-content: center;
@@ -310,6 +414,7 @@ export default function MerakiCrea() {
         }
         .mk-insta-tile:hover { opacity: 1; }
 
+        /* ---------- Footer ---------- */
         .mk-footer { background: var(--arena); padding: 60px 40px 36px; }
         .mk-footer-inner { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 40px; }
         .mk-footer h4 { font-size: 14px; margin-bottom: 16px; color: var(--chocolate); letter-spacing: 0.03em; }
@@ -322,6 +427,7 @@ export default function MerakiCrea() {
           display: flex; align-items: center; justify-content: center; margin: 0;
         }
 
+        /* ---------- Cart drawer ---------- */
         .mk-overlay { position: fixed; inset: 0; background: rgba(107,79,58,0.35); z-index: 60; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
         .mk-overlay.open { opacity: 1; pointer-events: auto; }
         .mk-drawer {
@@ -349,9 +455,10 @@ export default function MerakiCrea() {
         .mk-drawer-note { font-size: 12px; text-align: center; margin-top: 12px; opacity: 0.6; color: var(--chocolate); }
 
         @media (max-width: 880px) {
-          .mk-hero-inner { grid-template-columns: 1fr; text-align: center; }
-          .mk-hero-sub { margin: 0 auto 32px; }
+          .mk-hero-text { text-align: center; margin: 0 auto; }
           .mk-hero-actions { justify-content: center; }
+          .hero-carousel-img { object-position: center 35%; }
+          .hero-carousel-arrow { display: none; }
           .mk-values, .mk-steps { grid-template-columns: 1fr; gap: 36px; }
           .mk-footer-inner { grid-template-columns: 1fr; gap: 32px; }
           .mk-insta-grid { grid-template-columns: repeat(2, 1fr); }
@@ -360,6 +467,7 @@ export default function MerakiCrea() {
         }
       `}</style>
 
+      {/* HEADER */}
       <header className={`mk-header ${scrolled ? "scrolled" : ""}`}>
         <img src={LOGO_SRC} alt="Meraki Crea" className="mk-logo-img" />
         <button className="mk-nav-cart" onClick={() => setCartOpen(true)}>
@@ -369,32 +477,26 @@ export default function MerakiCrea() {
         </button>
       </header>
 
+      {/* HERO */}
       <section className="mk-hero">
+        <HeroCarousel images={HERO_IMAGES} />
         <div className="mk-hero-inner">
           <Reveal>
             <div className="mk-hero-text">
               <div className="mk-hero-eyebrow"><Sparkles size={13} /> Regalos personalizados, Chile</div>
-              <h1>No regalas un objeto.<br />Regalas un recuerdo que quedará para siempre.</h1>
-              <p className="mk-hero-sub">
-                Cada pieza de Meraki Crea se hace pensando en una persona específica: su nombre, su historia, ese momento que quieres celebrar.
-              </p>
+              <h1>No regalas un objeto.<br />Regalas un recuerdo, una emoción, un pedacito de ti.</h1>
               <div className="mk-hero-actions">
                 <button className="btn-primary" onClick={() => scrollTo("catalogo")}>
                   Personalizar mi regalo <ArrowRight size={16} />
                 </button>
-                <button className="btn-secondary" onClick={() => scrollTo("catalogo")}>
-                  Ver colección
-                </button>
               </div>
             </div>
-          </Reveal>
-          <Reveal delay={150}>
-            <HeroIllustration />
           </Reveal>
         </div>
         <div className="mk-scroll-cue"><ArrowDown size={16} /> Descubre más</div>
       </section>
 
+      {/* VALORES */}
       <section className="mk-section mk-center">
         <Reveal>
           <h2 className="title-serif">Regalos con significado</h2>
@@ -425,6 +527,7 @@ export default function MerakiCrea() {
         </div>
       </section>
 
+      {/* CATALOGO */}
       <section className="mk-section mk-center" id="catalogo">
         <Reveal>
           <h2 className="title-serif">Encuentra ese regalo</h2>
@@ -460,6 +563,7 @@ export default function MerakiCrea() {
         </div>
       </section>
 
+      {/* COMO FUNCIONA */}
       <section className="mk-section mk-center">
         <Reveal>
           <h2 className="title-serif">Cómo funciona</h2>
@@ -482,6 +586,7 @@ export default function MerakiCrea() {
         </div>
       </section>
 
+      {/* POR QUE MERAKI */}
       <section className="mk-section">
         <Reveal>
           <div className="mk-why">
@@ -491,6 +596,7 @@ export default function MerakiCrea() {
         </Reveal>
       </section>
 
+      {/* TESTIMONIOS */}
       <section className="mk-section mk-center">
         <Reveal>
           <h2 className="title-serif">Lo que sienten quienes regalan Meraki</h2>
@@ -512,10 +618,11 @@ export default function MerakiCrea() {
         </div>
       </section>
 
+      {/* INSTAGRAM */}
       <section className="mk-section mk-center">
         <Reveal>
           <h2 className="title-serif">Síguenos en Instagram</h2>
-          <p className="lede">@merakicrea — más momentos, más historias, más regalos.</p>
+          <p className="lede">@merakicrea_cl — más momentos, más historias, más regalos.</p>
         </Reveal>
         <div className="mk-insta-grid">
           {PRODUCTS.concat(PRODUCTS).slice(0, 8).map((p, i) => (
@@ -526,20 +633,21 @@ export default function MerakiCrea() {
         </div>
         <Reveal delay={200}>
           <div style={{ marginTop: 40 }}>
-            <a className="btn-secondary" href="https://instagram.com" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", display: "inline-block" }}>
+            <a className="btn-secondary" href="https://www.instagram.com/merakicrea_cl" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", display: "inline-block" }}>
               Síguenos
             </a>
           </div>
         </Reveal>
       </section>
 
+      {/* FOOTER */}
       <footer className="mk-footer">
         <div className="mk-footer-inner">
           <div>
             <img src={LOGO_SRC} alt="Meraki Crea" style={{ height: 30, marginBottom: 14 }} />
             <p>Regalos hechos con alma, creados especialmente para alguien que quieres.</p>
             <div className="mk-social-row">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><Instagram size={16} /></a>
+              <a href="https://www.instagram.com/merakicrea_cl" target="_blank" rel="noopener noreferrer"><Instagram size={16} /></a>
               <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer"><MessageCircle size={16} /></a>
               <a href="mailto:hola@merakicrea.cl"><Mail size={16} /></a>
             </div>
@@ -559,6 +667,7 @@ export default function MerakiCrea() {
         <div className="mk-footer-bottom">© {new Date().getFullYear()} Meraki Crea · hecho con cariño en Chile</div>
       </footer>
 
+      {/* CART */}
       <div className={`mk-overlay ${cartOpen ? "open" : ""}`} onClick={() => setCartOpen(false)} />
       <aside className={`mk-drawer ${cartOpen ? "open" : ""}`}>
         <div className="mk-drawer-head">
