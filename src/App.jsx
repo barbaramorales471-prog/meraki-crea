@@ -50,11 +50,10 @@ const TESTIMONIALS = [
     name: "Constanza P.",
     text: "Súper buena comunicación durante todo el proceso. Quedé feliz con el resultado y mi mamá más feliz aún.",
     stars: 5,
-    
   },
 ];
-const WHATSAPP_NUMBER = "56945846389";
 
+const WHATSAPP_NUMBER = "56945846389";
 const LOGO_SRC = logoUrl;
 const HERO_IMAGES = [heroImg1, heroImg2, heroImg3, heroImg4, heroImg5];
 
