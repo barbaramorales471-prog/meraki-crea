@@ -15,6 +15,7 @@ import heroImg5 from "../hero-5.webp";
 import imgMugTermico from "../producto-mug-termico.webp";
 import imgPolera from "../producto-polera.webp";
 import imgPoleronSauzal from "../producto-poleron-sauzal.jpg";
+import imgPoleronChile from "../producto-poleron-chile.webp";
 
 // ============================================================
 // DATA
@@ -27,6 +28,7 @@ const PRODUCTS = [
   { id: "vaso-termico", name: "Vaso Térmico Personalizado", desc: "Para que lleve algo tuyo a donde vaya, frío o caliente, todo el día.", price: 15000, swatch: ["#6B4F3A", "#D8C3A5"], photo: imgVaso, shipping: "Envío gratis Región Metropolitana" },
   { id: "mug-termico", name: "Mug Térmico Personalizado", desc: "El mensaje que más quieres que lea, justo antes de empezar su día.", price: 7990, swatch: ["#A8B39C", "#C98C6A"], photo: imgMugTermico },
   { id: "poleron-sauzal", name: "Polerón Sauzal", desc: "Un homenaje a ese lugar donde uno siempre quiere volver.", price: 25000, swatch: ["#2F4F3A", "#D8C3A5"], photo: imgPoleronSauzal, sizes: "Tallas: XS a XL", shipping: "Envío gratis Región Metropolitana" },
+  { id: "poleron-chile", name: "Polerón Chile", desc: "Para llevar tu país puesto, con orgullo y cariño.", price: 25000, swatch: ["#D52B1E", "#0033A0"], photo: imgPoleronChile, sizes: "Tallas: XS a XL", shipping: "Envío gratis Región Metropolitana" },
 ];
 
 const TESTIMONIALS = [
