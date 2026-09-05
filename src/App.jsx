@@ -15,7 +15,10 @@ import heroImg5 from "../hero-5.webp";
 import imgMugTermico from "../producto-mug-termico.webp";
 import imgPolera from "../producto-polera.webp";
 import imgPoleronSauzal from "../producto-poleron-sauzal.jpg";
-import imgPoleronChile from "../producto-poleron-chile.webp";
+import imgPoleronChileBlanco from "../producto-poleron-chile-blanco.webp";
+import imgPoleronChileNegro from "../producto-poleron-chile-negro.webp";
+import imgPoleronChileFucsia from "../producto-poleron-chile-fucsia.webp";
+import imgPoleronChileRosado from "../producto-poleron-chile-rosado.webp";
 
 // ============================================================
 // DATA
@@ -28,7 +31,14 @@ const PRODUCTS = [
   { id: "vaso-termico", name: "Vaso Térmico Personalizado", desc: "Para que lleve algo tuyo a donde vaya, frío o caliente, todo el día.", price: 15000, swatch: ["#6B4F3A", "#D8C3A5"], photo: imgVaso, shipping: "Envío gratis Región Metropolitana" },
   { id: "mug-termico", name: "Mug Térmico Personalizado", desc: "El mensaje que más quieres que lea, justo antes de empezar su día.", price: 7990, swatch: ["#A8B39C", "#C98C6A"], photo: imgMugTermico },
   { id: "poleron-sauzal", name: "Polerón Sauzal", desc: "Un homenaje a ese lugar donde uno siempre quiere volver.", price: 25000, swatch: ["#2F4F3A", "#D8C3A5"], photo: imgPoleronSauzal, sizes: "Tallas: XS a XL", shipping: "Envío gratis Región Metropolitana" },
-  { id: "poleron-chile", name: "Polerón Chile", desc: "Para llevar tu país puesto, con orgullo y cariño.", price: 25000, swatch: ["#D52B1E", "#0033A0"], photo: imgPoleronChile, sizes: "Tallas: XS a XL", shipping: "Envío gratis Región Metropolitana" },
+  { id: "poleron-chile", name: "Polerón Chile", desc: "Para llevar tu país puesto, con orgullo y cariño.", price: 25000, photo: imgPoleronChileBlanco, sizes: "Tallas: XS a XL", shipping: "Envío gratis Región Metropolitana",
+    colors: [
+      { name: "Blanco", hex: "#F2EEE7", photo: imgPoleronChileBlanco },
+      { name: "Negro", hex: "#1A1A1A", photo: imgPoleronChileNegro },
+      { name: "Fucsia", hex: "#E4007C", photo: imgPoleronChileFucsia },
+      { name: "Rosado", hex: "#F4B8C8", photo: imgPoleronChileRosado },
+    ],
+  },
 ];
 
 const TESTIMONIALS = [
@@ -92,6 +102,53 @@ function Reveal({ children, delay = 0, className = "" }) {
 // ============================================================
 // DECORATIVE ART (illustrated, no stock photography)
 // ============================================================
+
+function ProductCard({ p, justAdded, addToCart }) {
+  const [colorIdx, setColorIdx] = useState(0);
+  const activePhoto = p.colors ? p.colors[colorIdx].photo : p.photo;
+
+  return (
+    <div className="mk-card">
+      {activePhoto ? (
+        <div className="gift-art">
+          <img src={activePhoto} alt={p.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+        </div>
+      ) : (
+        <GiftArt swatch={p.swatch} id={p.id} />
+      )}
+      <div className="mk-card-body">
+        <h3 className="title-display">{p.name}</h3>
+        <p className="desc">{p.desc}</p>
+        {p.colors && (
+          <div className="mk-swatches" role="group" aria-label="Colores disponibles">
+            {p.colors.map((c, ci) => (
+              <button
+                key={c.name}
+                type="button"
+                className={`mk-swatch-dot ${ci === colorIdx ? "active" : ""}`}
+                style={{ backgroundColor: c.hex }}
+                title={c.name}
+                aria-label={c.name}
+                onClick={() => setColorIdx(ci)}
+              />
+            ))}
+          </div>
+        )}
+        {p.sizes && <p className="mk-sizes">{p.sizes}</p>}
+        {p.shipping && <p className="mk-shipping">{p.shipping}</p>}
+        <div className="mk-card-foot">
+          <span className="mk-price">{clp(p.price)}</span>
+          <button
+            className={`btn-personalize ${justAdded === p.id ? "added" : ""}`}
+            onClick={() => addToCart(p.id)}
+          >
+            {justAdded === p.id ? "¡Listo!" : "Personalizar"}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function GiftArt({ swatch, id, big = false }) {
   const [c1, c2] = swatch;
@@ -404,6 +461,9 @@ export default function MerakiCrea() {
         .mk-card-body p.desc { font-size: 13.5px; color: var(--chocolate); opacity: 0.7; line-height: 1.55; min-height: 40px; margin-bottom: 18px; }
         .mk-card-foot { display: flex; align-items: center; justify-content: space-between; }
         .mk-price { font-size: 15.5px; font-weight: 600; color: var(--chocolate); }
+        .mk-swatches { display: flex; gap: 8px; margin: 0 0 12px; }
+        .mk-swatch-dot { width: 20px; height: 20px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.15); cursor: pointer; padding: 0; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .mk-swatch-dot.active { box-shadow: 0 0 0 2px var(--blanco), 0 0 0 3.5px var(--chocolate); transform: scale(1.05); }
         .mk-sizes { font-size: 12px; color: var(--chocolate); opacity: 0.65; margin: -10px 0 10px; }
         .mk-shipping { font-size: 12px; color: var(--terracota); opacity: 0.9; margin: -10px 0 14px; font-weight: 500; }
         .btn-personalize {
@@ -567,30 +627,7 @@ export default function MerakiCrea() {
         <div className="mk-grid">
           {PRODUCTS.map((p, i) => (
             <Reveal delay={i * 100} key={p.id}>
-              <div className="mk-card">
-                {p.photo ? (
-                  <div className="gift-art">
-                    <img src={p.photo} alt={p.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                  </div>
-                ) : (
-                  <GiftArt swatch={p.swatch} id={p.id} />
-                )}
-                <div className="mk-card-body">
-                  <h3 className="title-display">{p.name}</h3>
-                  <p className="desc">{p.desc}</p>
-                  {p.sizes && <p className="mk-sizes">{p.sizes}</p>}
-                  {p.shipping && <p className="mk-shipping">{p.shipping}</p>}
-                  <div className="mk-card-foot">
-                    <span className="mk-price">{clp(p.price)}</span>
-                    <button
-                      className={`btn-personalize ${justAdded === p.id ? "added" : ""}`}
-                      onClick={() => addToCart(p.id)}
-                    >
-                      {justAdded === p.id ? "¡Listo!" : "Personalizar"}
-                    </button>
-                  </div>
-                </div>
-              </div>
+              <ProductCard p={p} justAdded={justAdded} addToCart={addToCart} />
             </Reveal>
           ))}
         </div>
