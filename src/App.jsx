@@ -12,7 +12,9 @@ import heroImg3 from "../hero-3.webp";
 import heroImg4 from "../hero-4.webp";
 import heroImg5 from "../hero-5.webp";
 import imgPolera from "../producto-polera.webp";
-import imgPoleronSauzal from "../producto-poleron-sauzal.jpg";
+import imgPoleronSauzalArena from "../producto-poleron-sauzal-arena.webp";
+import imgPoleronSauzalNegro from "../producto-poleron-sauzal-negro.webp";
+import imgPoleronSauzalGris from "../producto-poleron-sauzal-gris.webp";
 import imgPoleronChileBlanco from "../producto-poleron-chile-blanco.webp";
 import imgPoleronChileNegro from "../producto-poleron-chile-negro.webp";
 import imgPoleronChileFucsia from "../producto-poleron-chile-fucsia.webp";
@@ -26,7 +28,13 @@ const PRODUCTS = [
   { id: "polera", name: "Polera Personalizada", desc: "Tu mensaje o su nombre, puesto sobre algo que va a usar todos los días.", price: 15000, swatch: ["#E8DDCF", "#B89C7D"], photo: imgPolera, shipping: "Envío gratis Región Metropolitana" },
   { id: "taza", name: "Taza Personalizada", desc: "Para acompañar su café o té de cada mañana con un recuerdo tuyo.", price: 6000, swatch: ["#A8B39C", "#6B4F3A"], photo: imgTaza, shipping: "Envío gratis Región Metropolitana" },
   { id: "vaso-termico", name: "Vaso Térmico Personalizado", desc: "Para que lleve algo tuyo a donde vaya, frío o caliente, todo el día.", price: 15000, swatch: ["#6B4F3A", "#D8C3A5"], photo: imgVaso, shipping: "Envío gratis Región Metropolitana" },
-  { id: "poleron-sauzal", name: "Polerón Sauzal", desc: "Un homenaje a ese lugar donde uno siempre quiere volver.", price: 25000, swatch: ["#2F4F3A", "#D8C3A5"], photo: imgPoleronSauzal, sizes: "Tallas: XS a XL", shipping: "Envío gratis Región Metropolitana" },
+  { id: "poleron-sauzal", name: "Polerón Sauzal", desc: "Un homenaje a ese lugar donde uno siempre quiere volver.", price: 25000, photo: imgPoleronSauzalArena, sizes: "Tallas: XS a XL", shipping: "Envío gratis Región Metropolitana",
+    colors: [
+      { name: "Arena", hex: "#D8C9B0", photo: imgPoleronSauzalArena },
+      { name: "Negro", hex: "#1A1A1A", photo: imgPoleronSauzalNegro },
+      { name: "Gris", hex: "#B5B3AE", photo: imgPoleronSauzalGris },
+    ],
+  },
   { id: "poleron-chile", name: "Polerón Chile", desc: "Para llevar tu país puesto, con orgullo y cariño.", price: 25000, photo: imgPoleronChileBlanco, sizes: "Tallas: XS a XL", shipping: "Envío gratis Región Metropolitana",
     colors: [
       { name: "Blanco", hex: "#F2EEE7", photo: imgPoleronChileBlanco },
