@@ -6,8 +6,6 @@ import {
 import logoUrl from "../IMG_0995.png";
 import imgTaza from "../IMG_1018.png";
 import imgPoleron from "../IMG_1019.png";
-import imgLapiz from "../IMG_1020.png";
-import imgLlavero from "../IMG_1023.jpeg";
 import imgVaso from "../IMG_1024.jpeg";
 import heroImg1 from "../hero-1.webp";
 import heroImg2 from "../hero-2.webp";
@@ -15,9 +13,8 @@ import heroImg3 from "../hero-3.webp";
 import heroImg4 from "../hero-4.webp";
 import heroImg5 from "../hero-5.webp";
 import imgMugTermico from "../producto-mug-termico.webp";
-import imgAgendaA5 from "../producto-agenda-a5.webp";
-import imgAgendaB5 from "../producto-agenda-b5.webp";
 import imgPolera from "../producto-polera.webp";
+import imgPoleronSauzal from "../producto-poleron-sauzal.jpg";
 
 // ============================================================
 // DATA
@@ -26,13 +23,10 @@ import imgPolera from "../producto-polera.webp";
 const PRODUCTS = [
   { id: "poleron", name: "Polerón Personalizado", desc: "Para esos días en que alguien necesita sentirse abrazado.", price: 11990, swatch: ["#D8C3A5", "#C98C6A"], photo: imgPoleron },
   { id: "polera", name: "Polera Personalizada", desc: "Tu mensaje o su nombre, puesto sobre algo que va a usar todos los días.", price: 9990, swatch: ["#E8DDCF", "#B89C7D"], photo: imgPolera },
-  { id: "taza", name: "Taza Personalizada", desc: "Para acompañar su café o té de cada mañana con un recuerdo tuyo.", price: 3000, swatch: ["#A8B39C", "#6B4F3A"], photo: imgTaza },
-  { id: "llavero", name: "Llavero Personalizado", desc: "Un detalle pequeño que lleva siempre encima, sin darse cuenta.", price: 1000, swatch: ["#B89C7D", "#E8DDCF"], photo: imgLlavero },
-  { id: "lapiz", name: "Lápiz Personalizado", desc: "El detalle perfecto para regalar incluso sin ocasión especial.", price: 1000, swatch: ["#C98C6A", "#A8B39C"], photo: imgLapiz },
-  { id: "vaso-termico", name: "Vaso Térmico Personalizado", desc: "Para que lleve algo tuyo a donde vaya, frío o caliente, todo el día.", price: 11990, swatch: ["#6B4F3A", "#D8C3A5"], photo: imgVaso },
+  { id: "taza", name: "Taza Personalizada", desc: "Para acompañar su café o té de cada mañana con un recuerdo tuyo.", price: 6000, swatch: ["#A8B39C", "#6B4F3A"], photo: imgTaza, shipping: "Envío gratis Región Metropolitana" },
+  { id: "vaso-termico", name: "Vaso Térmico Personalizado", desc: "Para que lleve algo tuyo a donde vaya, frío o caliente, todo el día.", price: 15000, swatch: ["#6B4F3A", "#D8C3A5"], photo: imgVaso, shipping: "Envío gratis Región Metropolitana" },
   { id: "mug-termico", name: "Mug Térmico Personalizado", desc: "El mensaje que más quieres que lea, justo antes de empezar su día.", price: 7990, swatch: ["#A8B39C", "#C98C6A"], photo: imgMugTermico },
-  { id: "agenda-a5", name: "Agenda A5", desc: "Para que cada página que escriba lleve un poco de ti también.", price: 11990, swatch: ["#D8C3A5", "#6B4F3A"], photo: imgAgendaA5 },
-  { id: "agenda-b5", name: "Agenda B5", desc: "Más espacio para sus ideas, con su nombre en la portada.", price: 15990, swatch: ["#E8DDCF", "#C98C6A"], photo: imgAgendaB5 },
+  { id: "poleron-sauzal", name: "Polerón Sauzal", desc: "Un homenaje a ese lugar donde uno siempre quiere volver.", price: 25000, swatch: ["#2F4F3A", "#D8C3A5"], photo: imgPoleronSauzal, sizes: "Tallas: XS a XL", shipping: "Envío gratis Región Metropolitana" },
 ];
 
 const TESTIMONIALS = [
@@ -408,6 +402,8 @@ export default function MerakiCrea() {
         .mk-card-body p.desc { font-size: 13.5px; color: var(--chocolate); opacity: 0.7; line-height: 1.55; min-height: 40px; margin-bottom: 18px; }
         .mk-card-foot { display: flex; align-items: center; justify-content: space-between; }
         .mk-price { font-size: 15.5px; font-weight: 600; color: var(--chocolate); }
+        .mk-sizes { font-size: 12px; color: var(--chocolate); opacity: 0.65; margin: -10px 0 10px; }
+        .mk-shipping { font-size: 12px; color: var(--terracota); opacity: 0.9; margin: -10px 0 14px; font-weight: 500; }
         .btn-personalize {
           background: var(--arena); color: var(--chocolate); border: none; border-radius: 999px;
           padding: 9px 18px; font-size: 12.5px; font-weight: 500; cursor: pointer;
@@ -580,6 +576,8 @@ export default function MerakiCrea() {
                 <div className="mk-card-body">
                   <h3 className="title-display">{p.name}</h3>
                   <p className="desc">{p.desc}</p>
+                  {p.sizes && <p className="mk-sizes">{p.sizes}</p>}
+                  {p.shipping && <p className="mk-shipping">{p.shipping}</p>}
                   <div className="mk-card-foot">
                     <span className="mk-price">{clp(p.price)}</span>
                     <button
