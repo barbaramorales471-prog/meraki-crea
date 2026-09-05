@@ -5,7 +5,6 @@ import {
 } from "lucide-react";
 import logoUrl from "../IMG_0995.png";
 import imgTaza from "../IMG_1018.png";
-import imgPoleron from "../IMG_1019.png";
 import imgVaso from "../IMG_1024.jpeg";
 import heroImg1 from "../hero-1.webp";
 import heroImg2 from "../hero-2.webp";
@@ -25,8 +24,7 @@ import imgPoleronChileRosado from "../producto-poleron-chile-rosado.webp";
 // ============================================================
 
 const PRODUCTS = [
-  { id: "poleron", name: "Polerón Personalizado", desc: "Para esos días en que alguien necesita sentirse abrazado.", price: 11990, swatch: ["#D8C3A5", "#C98C6A"], photo: imgPoleron },
-  { id: "polera", name: "Polera Personalizada", desc: "Tu mensaje o su nombre, puesto sobre algo que va a usar todos los días.", price: 9990, swatch: ["#E8DDCF", "#B89C7D"], photo: imgPolera },
+  { id: "polera", name: "Polera Personalizada", desc: "Tu mensaje o su nombre, puesto sobre algo que va a usar todos los días.", price: 15000, swatch: ["#E8DDCF", "#B89C7D"], photo: imgPolera, shipping: "Envío gratis Región Metropolitana" },
   { id: "taza", name: "Taza Personalizada", desc: "Para acompañar su café o té de cada mañana con un recuerdo tuyo.", price: 6000, swatch: ["#A8B39C", "#6B4F3A"], photo: imgTaza, shipping: "Envío gratis Región Metropolitana" },
   { id: "vaso-termico", name: "Vaso Térmico Personalizado", desc: "Para que lleve algo tuyo a donde vaya, frío o caliente, todo el día.", price: 15000, swatch: ["#6B4F3A", "#D8C3A5"], photo: imgVaso, shipping: "Envío gratis Región Metropolitana" },
   { id: "mug-termico", name: "Mug Térmico Personalizado", desc: "El mensaje que más quieres que lea, justo antes de empezar su día.", price: 7990, swatch: ["#A8B39C", "#C98C6A"], photo: imgMugTermico },
