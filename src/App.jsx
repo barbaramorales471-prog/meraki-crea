@@ -154,7 +154,7 @@ function ProductCard({ p, justAdded, addToCart }) {
   );
 }
 
-function GiftArt({ swatch, id, big = false }) {
+function GiftArt({ swatch = ["#E8DDCF", "#B89C7D"], id, big = false }) {
   const [c1, c2] = swatch;
   return (
     <div className={`gift-art ${big ? "big" : ""}`}>
@@ -285,8 +285,8 @@ export default function MerakiCrea() {
   const items = useMemo(
     () =>
       Object.entries(cart)
-        .map(([id, qty]) => ({ ...PRODUCTS.find((p) => p.id === id), qty }))
-        .filter(Boolean),
+        .map(([id, qty]) => ({ ...PRODUCTS.find((p) => p.id === id), id, qty }))
+        .filter((it) => it.price),
     [cart]
   );
   const total = items.reduce((s, it) => s + it.price * it.qty, 0);
@@ -747,7 +747,13 @@ export default function MerakiCrea() {
           ) : (
             items.map((it) => (
               <div className="mk-line" key={it.id}>
-                <div className="mk-line-art"><GiftArt swatch={it.swatch} id={`mini-${it.id}`} /></div>
+                <div className="mk-line-art">
+                  {it.photo ? (
+                    <img src={it.photo} alt={it.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                  ) : (
+                    <GiftArt swatch={it.swatch || ["#E8DDCF", "#B89C7D"]} id={`mini-${it.id}`} />
+                  )}
+                </div>
                 <div className="mk-line-info">
                   <h4>{it.name}</h4>
                   <div className="lp">{clp(it.price)} c/u</div>
